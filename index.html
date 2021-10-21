@@ -14,17 +14,9 @@
 
     <div id="mapid" style="height:100%; width: 100%;"></div>
 
-
-
     <script>
-        var lha;
-        fetch('https://wtfsahealthauthority.xyz/lha_small.pbf')
-            .then(data => lha = data);
 
-
-
-
-        var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+        var mymap = L.map('mapid');
         var geojsonMarkerOptions = {
           radius: 5,
           fillColor: "#800080",
@@ -34,9 +26,6 @@
           fillOpacity: 0.6
         };
 
-    
-    
-    
         var CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
 	        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 	        subdomains: 'abcd',
@@ -53,7 +42,6 @@
         }
             
         function style(feature) {
-            
             return {
                 fillColor: getColor(feature.properties.HA_Name),
                 weight: 2,
@@ -64,10 +52,23 @@
             };
             
         }
-    var lha2 = geobuf.decode(new Pbf(lha));  
-    hamap = L.geoJson(lha2, {style: style}).addTo(mymap);
-    
-    mymap.fitBounds(hamap.getBounds());
+
+        fetch('https://wtfsahealthauthority.xyz/lha_small.pbf')
+            .then(response => response.arrayBuffer())
+            .then(data => geojson = geobuf.decode(new Pbf(new Uint8Array(data))))
+            .then(addToMap => map = L.geoJson(geojson, {style: style}).addTo(mymap))
+            .then(fitMap => mymap.fitBounds(map.getBounds()));
+
+        /* THIS CODE WOULD ALSO WORK
+        var get_data = async () => {
+            var response = await fetch('https://wtfsahealthauthority.xyz/lha_small.pbf');
+            var data = await response.arrayBuffer();
+            var geojson = geobuf.decode(new Pbf(new Uint8Array(data)));
+            map = L.geoJson(geojson, {style: style}).addTo(mymap);
+            mymap.fitBounds(map.getBounds());
+        }
+        get_data();
+        */
 
       </script>
 
