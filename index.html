@@ -1,14 +1,10 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-    crossorigin=""/>
-     <!-- Make sure you put this AFTER Leaflet's CSS -->
- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
- integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
- crossorigin=""></script>
- <script src="https://unpkg.com/geobuf@3.0.2/dist/geobuf.js" crossorigin=""></script>
- <script src="https://unpkg.com/pbf@3.0.5/dist/pbf.js" crossorigin=""></script>
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <script src="https://unpkg.com/geobuf@3.0.2/dist/geobuf.js" crossorigin=""></script>
+    <script src="https://unpkg.com/pbf@3.0.5/dist/pbf.js" crossorigin=""></script>
 </head>
 <body>
 
@@ -17,6 +13,7 @@
     <script>
 
         var mymap = L.map('mapid');
+
         var geojsonMarkerOptions = {
           radius: 5,
           fillColor: "#800080",
@@ -50,7 +47,6 @@
                 dashArray: '3',
                 fillOpacity: 0.6
             };
-            
         }
 
         fetch('https://wtfsahealthauthority.xyz/lha_small.pbf')
@@ -73,6 +69,4 @@
       </script>
 
 </body>
-
-
 </html>
