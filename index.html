@@ -17,7 +17,9 @@
 
 
     <script>
-        lha = fetch('lha_small.pbf');
+        var lha;
+        fetch('https://wtfsahealthauthority.xyz/lha_small.pbf')
+            .then(data => lha = data);
 
 
 
@@ -62,8 +64,8 @@
             };
             
         }
-    var lha = geobuf.decode(new Pbf('./lha_small.pbf'));  
-    hamap = L.geoJson(lha, {style: style}).addTo(mymap);
+    var lha2 = geobuf.decode(new Pbf(lha));  
+    hamap = L.geoJson(lha2, {style: style}).addTo(mymap);
     
     mymap.fitBounds(hamap.getBounds());
 
