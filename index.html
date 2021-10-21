@@ -7,8 +7,8 @@
  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
  crossorigin=""></script>
-
- <script src="lha_small.geojson"></script>
+ <script src="https://unpkg.com/geobuf@3.0.2/dist/geobuf.js" crossorigin=""></script>
+ <script src="https://unpkg.com/pbf@3.0.5/dist/pbf.js" crossorigin=""></script>
 </head>
 <body>
 
@@ -17,6 +17,10 @@
 
 
     <script>
+        lha = fetch('lha_small.pbf');
+
+
+
 
         var mymap = L.map('mapid').setView([51.505, -0.09], 13);
         var geojsonMarkerOptions = {
@@ -32,10 +36,10 @@
     
     
         var CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-	subdomains: 'abcd',
-	maxZoom: 19
-}).addTo(mymap);
+	        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+	        subdomains: 'abcd',
+	        maxZoom: 19
+        }).addTo(mymap);
     
         function getColor(d) {
             return d == "Fraser" ? '#fbb4ae' :
@@ -58,8 +62,8 @@
             };
             
         }
-      
-hamap = L.geoJson(lha, {style: style}).addTo(mymap);
+    var lha = geobuf.decode(new Pbf('./lha_small.pbf'));  
+    hamap = L.geoJson(lha, {style: style}).addTo(mymap);
     
     mymap.fitBounds(hamap.getBounds());
 
